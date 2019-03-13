@@ -12,9 +12,23 @@ public class LampPostClientMain {
 
 	public static void main(String[] args) {
 		System.out.println("Starting LampPostClient " + Reference.VERSION);
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+	        public void run() {
+	            try {	            	
+	                Thread.sleep(200);
+	                System.out.println("\nReceived shutdown request from system. (CTRL-C)");
+	                
+	                Reference.RUNNING = false;		                
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    });
 
 		System.out.println("Connecting to server...");
-		NetworkManager.connectToServer(args[0]);
+		Reference.lampName = args[1];
+		NetworkManager.connectToServer(args[0]);				
 
 		while (Reference.RUNNING) {		
 				if (Reference.LAMPSTATE) {

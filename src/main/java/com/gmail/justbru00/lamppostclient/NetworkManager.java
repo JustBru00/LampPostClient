@@ -33,6 +33,14 @@ public class NetworkManager {
 
 			if (!socket.isClosed()) {
 				connected = true;
+				try {
+					String welcome = in.readLine();
+					System.out.println(welcome);
+					out.println(Reference.lampName);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				while (connected) {
 					// Attempt to send message
 					out.println("WHAT_DO_YOU_WANT_FROM_ME?");

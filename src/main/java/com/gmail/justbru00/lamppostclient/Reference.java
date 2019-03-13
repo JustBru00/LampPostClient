@@ -8,6 +8,7 @@ public class Reference {
 	 * True == ON, FALSE = OFF;
 	 */
 	public static boolean LAMPSTATE = false;
+	public static String lampName;
 	
 	public static final int PIN_TIMER_INTERVAL = 100;
 	
