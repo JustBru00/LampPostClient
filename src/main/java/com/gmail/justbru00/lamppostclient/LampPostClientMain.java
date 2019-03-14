@@ -28,15 +28,19 @@ public class LampPostClientMain {
 
 		System.out.println("Connecting to server...");
 		Reference.lampName = args[1];
-		NetworkManager.connectToServer(args[0]);				
+		new Thread(() -> {						
+			NetworkManager.connectToServer(args[0]);							
+		
+		}).start();
+					
 
 		while (Reference.RUNNING) {		
 				if (Reference.LAMPSTATE) {
 					// LAMPON
-					lampRelay.setState(SimplePinState.ON);
+					lampRelay.setState(SimplePinState.OFF);
 				} else {
 					// LAMPOFF
-					lampRelay.setState(SimplePinState.OFF);
+					lampRelay.setState(SimplePinState.ON);
 				}
 			
 			try {
